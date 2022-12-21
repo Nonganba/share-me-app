@@ -56,7 +56,7 @@ const Pin = ({ pin }) => {
   };
 
   return (
-    <div className="m-2 min-w-210">
+    <div className="m-2">
       <div
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
