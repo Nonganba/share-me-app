@@ -72,11 +72,17 @@ module.exports = {
             transform: "translateZ(160px)",
           },
         },
+
+        "slide-down": {
+          from: { opacity: 0, transform: "translateY(-15%)" },
+          to: { opacity: 1, transform: "none" },
+        },
       },
       animation: {
         "slide-in": "slide-in 0.5s ease-out",
         "slide-fwd":
           " slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        "slide-down": "slide-down 0.2s ease-in-out",
       },
       transitionProperty: {
         height: "height",

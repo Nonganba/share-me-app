@@ -8,11 +8,14 @@ import MasonryLayout from "./MasonryLayout";
 import { similarPinsQuery, pinDetailsQuery } from "../utils/data";
 import Spinner from "./Spinner";
 
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+
 const PinDetails = ({ user }) => {
   const [pins, setSimilarPins] = useState(null);
   const [pinDetails, setPinDetails] = useState(null);
   const [comment, setComment] = useState("");
   const [addingComment, setAddingComment] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   const { pinId } = useParams();
 
@@ -84,15 +87,17 @@ const PinDetails = ({ user }) => {
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
-                className="bg-gray-200 text-green-600 w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+                className="bg-gray-200 text-green-600 w-12 h-12 p-2 rounded-full flex items-center justify-center text-dark text-3xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
               >
                 <MdDownloadForOffline />
               </a>
             </div>
 
-            <a href={pinDetails?.destination} target="_blank">
-              {pinDetails.destination}
-            </a>
+            <div className="truncate max-w-md ml-9 underline text-blue-500">
+              <a href={pinDetails?.destination} target="_blank">
+                {pinDetails.destination}
+              </a>
+            </div>
           </div>
 
           <div>
@@ -117,55 +122,69 @@ const PinDetails = ({ user }) => {
             </p>
           </Link>
 
-          <h2 className="mt-5 text-2xl">Comments</h2>
+          <div className="flex flex-row gap-6">
+            <h2 className="mt-5 text-2xl font-bold">Comments</h2>
+            <span
+              className="mt-4 bg-gray-200 w-9 h-9 p-1.5 rounded-full flex items-center justify-center text-dark text-3xl opacity-70 hover:opacity-100 hover:shadow-lg outline-none cursor-pointer"
+              onClick={() => {
+                setShowComments((prev) => !prev);
+              }}
+            >
+              {showComments ? <IoIosArrowDown /> : <IoIosArrowForward />}
+            </span>
+          </div>
 
-          <div className="max-h-370 overflow-y-auto">
-            {pinDetails?.comments?.map((comment, index) => (
-              <div
-                className="flex gap-2 mt-5 items-center bg-white rounded-lg"
-                key={index}
-              >
+          {showComments && (
+            <div className="animate-slide-down">
+              <div className="max-h-370 overflow-y-auto smooth-transition animate-slide-down">
+                {pinDetails?.comments?.map((comment, index) => (
+                  <div
+                    className="flex gap-2 mt-5 items-center bg-white rounded-lg"
+                    key={index}
+                  >
+                    <Link to={`/user-profile/${user?._id}`}>
+                      <img
+                        src={comment.postedBy.image}
+                        alt="user-profile"
+                        className="w-9 h-9 rounded-full cursor-pointer"
+                      />
+                    </Link>
+
+                    <div className="flex flex-col">
+                      <p className="font-bold">{comment.postedBy.userName}</p>
+                      <p className="text-sm">{comment.comment}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap mt-6 gap-3 items-center">
                 <Link to={`/user-profile/${user?._id}`}>
                   <img
-                    src={comment.postedBy.image}
-                    alt="user-profile"
                     className="w-9 h-9 rounded-full cursor-pointer"
+                    src={user?.image}
+                    alt="user-profile"
                   />
                 </Link>
 
-                <div className="flex flex-col">
-                  <p className="font-bold">{comment.postedBy.userName}</p>
-                  <p className="text-sm">{comment.comment}</p>
-                </div>
+                <input
+                  className="flex-1 border-gray-100 outline-white border-2 p-2 rounded-2xl focus:border-gray-300"
+                  type="text"
+                  placeholder="Add a comment"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+
+                <button
+                  type="button"
+                  className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold outline-none"
+                  onClick={addComment}
+                >
+                  {addingComment ? "Posting comment..." : "Post"}
+                </button>
               </div>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap mt-6 gap-3 items-center">
-            <Link to={`/user-profile/${user?._id}`}>
-              <img
-                className="w-9 h-9 rounded-full cursor-pointer"
-                src={user?.image}
-                alt="user-profile"
-              />
-            </Link>
-
-            <input
-              className="flex-1 border-gray-100 outline-white border-2 p-2 rounded-2xl focus:border-gray-300"
-              type="text"
-              placeholder="Add a comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
-
-            <button
-              type="button"
-              className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold outline-none"
-              onClick={addComment}
-            >
-              {addingComment ? "Posting comment..." : "Post"}
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
