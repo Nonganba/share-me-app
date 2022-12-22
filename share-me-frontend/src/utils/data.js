@@ -5,6 +5,10 @@ export const categories = [
       "https://i.pinimg.com/750x/eb/47/44/eb4744eaa3b3ccd89749fa3470e2b0de.jpg",
   },
   {
+    name: "motorcycles",
+    image: "https://source.unsplash.com/1600x900/?motorcycles",
+  },
+  {
     name: "fitness",
     image:
       "https://i.pinimg.com/236x/25/14/29/251429345940a47490cc3d47dfe0a8eb.jpg",
