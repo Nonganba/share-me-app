@@ -9,6 +9,9 @@ import { similarPinsQuery, pinDetailsQuery } from "../utils/data";
 import Spinner from "./Spinner";
 
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { AiTwotoneDelete } from "react-icons/ai";
+
+import { useNavigate } from "react-router-dom";
 
 const PinDetails = ({ user }) => {
   const [pins, setSimilarPins] = useState(null);
@@ -16,8 +19,11 @@ const PinDetails = ({ user }) => {
   const [comment, setComment] = useState("");
   const [addingComment, setAddingComment] = useState(false);
   const [showComments, setShowComments] = useState(false);
+  const [savingPost, setSavingPost] = useState(false);
 
   const { pinId } = useParams();
+
+  const navigate = useNavigate();
 
   const fetchPinDetails = () => {
     let query = pinDetailsQuery(pinId);
@@ -31,6 +37,43 @@ const PinDetails = ({ user }) => {
           client.fetch(query).then((res) => setSimilarPins(res));
         }
       });
+    }
+  };
+
+  const deletePin = (id) => {
+    client.delete(id).then(() => {
+      window.location.reload();
+    });
+  };
+
+  let alreadySaved = pinDetails?.save?.filter(
+    (item) => item?.postedBy?._id === user?._id
+  );
+
+  alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
+
+  const savePin = (id) => {
+    if (alreadySaved?.length === 0) {
+      setSavingPost(true);
+
+      client
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert("after", "save[-1]", [
+          {
+            _key: uuidv4(),
+            userId: user?._id,
+            postedBy: {
+              _type: "postedBy",
+              _ref: user?._id,
+            },
+          },
+        ])
+        .commit()
+        .then(() => {
+          window.location.reload();
+          setSavingPost(false);
+        });
     }
   };
 
@@ -80,7 +123,7 @@ const PinDetails = ({ user }) => {
 
         <div className="w-full p-5 flex-1 xl:min-w-620">
           <div className="flex items-center justify-between">
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-3 items-center">
               <a
                 href={`${pinDetails?.image?.asset?.url}?dl=`}
                 download
@@ -91,6 +134,18 @@ const PinDetails = ({ user }) => {
               >
                 <MdDownloadForOffline />
               </a>
+
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deletePin(pinId);
+                  navigate("/");
+                }}
+                className="bg-gray-200 text-red-500 w-12 h-12 p-2 rounded-full flex items-center justify-center text-dark text-3xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+              >
+                <AiTwotoneDelete />
+              </button>
             </div>
 
             <div className="truncate max-w-md ml-9 underline text-blue-500">
@@ -124,6 +179,7 @@ const PinDetails = ({ user }) => {
 
           <div className="flex flex-row gap-6">
             <h2 className="mt-5 text-2xl font-bold">Comments</h2>
+
             <span
               className="mt-4 bg-gray-200 w-9 h-9 p-1.5 rounded-full flex items-center justify-center text-dark text-3xl opacity-70 hover:opacity-100 hover:shadow-lg outline-none cursor-pointer"
               onClick={() => {
@@ -132,6 +188,28 @@ const PinDetails = ({ user }) => {
             >
               {showComments ? <IoIosArrowDown /> : <IoIosArrowForward />}
             </span>
+
+            {alreadySaved?.length !== 0 ? (
+              <button
+                type="button"
+                className="bg-gray-900 ml-2 mt-2 opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none"
+              >
+                Saved
+              </button>
+            ) : (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  savePin(pinId);
+                }}
+                type="button"
+                className={`opacity-80 ml-2 mt-2 hover:opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none ${
+                  savingPost ? "bg-gray-900" : "bg-red-500"
+                }`}
+              >
+                {savingPost ? "Saving..." : "Save"}
+              </button>
+            )}
           </div>
 
           {showComments && (

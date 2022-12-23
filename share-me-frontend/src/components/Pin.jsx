@@ -91,9 +91,9 @@ const Pin = ({ pin }) => {
               {alreadySaved?.length !== 0 ? (
                 <button
                   type="button"
-                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none"
+                  className="bg-gray-900 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none"
                 >
-                  {pin?.save?.length} Saved
+                  Saved
                 </button>
               ) : (
                 <button
@@ -102,13 +102,15 @@ const Pin = ({ pin }) => {
                     savePin(_id);
                   }}
                   type="button"
-                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none"
+                  className={`opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-sm rounded-3xl hover:shadow-md outline-none ${
+                    savingPost ? "bg-gray-900" : "bg-red-500"
+                  }`}
                 >
-                  {pin?.save?.length} {savingPost ? "Saving" : "Save"}
+                 {savingPost ? "Saving..." : "Save"}
                 </button>
               )}
             </div>
-            <div className=" flex justify-between items-center gap-2 w-full">
+            <div className="flex justify-between items-center gap-2 w-full">
               {destination?.slice(8).length > 0 ? (
                 <a
                   href={destination}
@@ -118,7 +120,9 @@ const Pin = ({ pin }) => {
                 >
                   {" "}
                   <BsFillArrowUpRightCircleFill />
-                  {destination?.slice(8, 17)}...
+                  <span className="hidden lg:block">
+                    {destination?.slice(8, 17)}...
+                  </span>
                 </a>
               ) : undefined}
               {postedBy?._id === user?.googleId && (
