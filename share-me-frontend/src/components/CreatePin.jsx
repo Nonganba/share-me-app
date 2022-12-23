@@ -17,6 +17,7 @@ const CreatePin = ({ user }) => {
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
+  const [savingPin, setSavingPin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ const CreatePin = ({ user }) => {
 
   const savePin = () => {
     if (title && about && destination && imageAsset?._id && category) {
+      setSavingPin(true);
       const doc = {
         _type: "pin",
         title,
@@ -98,7 +100,7 @@ const CreatePin = ({ user }) => {
             {wrongImageType && <p>Wrong Image Type</p>}
 
             {!imageAsset ? (
-              <label className='cursor-pointer'>
+              <label className="cursor-pointer">
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-xl">
@@ -205,9 +207,11 @@ const CreatePin = ({ user }) => {
               <button
                 type="button"
                 onClick={savePin}
-                className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
+                className={`opacity-80 ml-2 mt-2 hover:opacity-100 text-white font-bold px-5 py-3 text-sm rounded-3xl hover:shadow-md outline-none ${
+                  savingPin ? "bg-gray-900 opacity-100" : "bg-red-500"
+                }`}
               >
-                Save Pin
+                {savingPin ? "Saving Pin..." : "Save Pin"}
               </button>
             </div>
           </div>
