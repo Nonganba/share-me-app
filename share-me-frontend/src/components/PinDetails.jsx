@@ -52,8 +52,6 @@ const PinDetails = ({ user }) => {
 
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
-  console.log(alreadySaved);
-
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
       setSavingPost(true);

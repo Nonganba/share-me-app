@@ -1,67 +1,69 @@
+import cars from "../assets/cars.png";
+import bikes from "../assets/bikes.png";
+import fitness from "../assets/fitness.png";
+import wallpaper from "../assets/wallpaper.png";
+import music from "../assets/music.png";
+import photo from "../assets/photo.png";
+import food from "../assets/food.png";
+import nature from "../assets/nature.png";
+import art from '../assets/art.png';
+import travel from '../assets/travel.png';
+import quotes from '../assets/quotes.png';
+import cats from '../assets/cats.png';
+import dogs from '../assets/dogs.png';
+
 export const categories = [
   {
     name: "cars",
-    image:
-      "https://i.pinimg.com/750x/eb/47/44/eb4744eaa3b3ccd89749fa3470e2b0de.jpg",
+    image: cars,
   },
   {
     name: "motorcycles",
-    image: "https://source.unsplash.com/1600x900/?motorcycles",
+    image: bikes,
   },
   {
     name: "fitness",
-    image:
-      "https://i.pinimg.com/236x/25/14/29/251429345940a47490cc3d47dfe0a8eb.jpg",
+    image: fitness,
   },
   {
     name: "wallpaper",
-    image:
-      "https://i.pinimg.com/236x/03/48/b6/0348b65919fcbe1e4f559dc4feb0ee13.jpg",
+    image: wallpaper,
   },
   {
-    name: "websites",
-    image:
-      "https://i.pinimg.com/750x/66/b1/29/66b1296d36598122e6a4c5452b5a7149.jpg",
+    name: "music",
+    image: music,
   },
   {
-    name: "photo",
-    image:
-      "https://i.pinimg.com/236x/72/8c/b4/728cb43f48ca762a75da645c121e5c57.jpg",
+    name: "photography",
+    image: photo,
   },
   {
     name: "food",
-    image:
-      "https://i.pinimg.com/236x/7d/ef/15/7def15ac734837346dac01fad598fc87.jpg",
+    image: food,
   },
   {
     name: "nature",
-    image:
-      "https://i.pinimg.com/236x/b9/82/d4/b982d49a1edd984c4faef745fd1f8479.jpg",
+    image: nature,
   },
   {
     name: "art",
-    image:
-      "https://i.pinimg.com/736x/f4/e5/ba/f4e5ba22311039662dd253be33bf5f0e.jpg",
+    image: art,
   },
   {
     name: "travel",
-    image:
-      "https://i.pinimg.com/236x/fa/95/98/fa95986f2c408098531ca7cc78aee3a4.jpg",
+    image: travel,
   },
   {
     name: "quotes",
-    image:
-      "https://i.pinimg.com/236x/46/7c/17/467c17277badb00b638f8ec4da89a358.jpg",
+    image: quotes,
   },
   {
     name: "cats",
-    image:
-      "https://i.pinimg.com/236x/6c/3c/52/6c3c529e8dadc7cffc4fddedd4caabe1.jpg",
+    image: cats,
   },
   {
     name: "dogs",
-    image:
-      "https://i.pinimg.com/236x/1b/c8/30/1bc83077e363db1a394bf6a64b071e9f.jpg",
+    image: dogs,
   },
   {
     name: "other",
