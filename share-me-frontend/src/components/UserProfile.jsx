@@ -14,7 +14,7 @@ import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
 
 const randomImage =
-  "https://source.unsplash.com/1600x900/?nature,photography,technology,cars,bikes";
+  "https://source.unsplash.com/1600x900/?art";
 
 const activeBtnStyle =
   "bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none";
