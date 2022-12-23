@@ -135,17 +135,19 @@ const PinDetails = ({ user }) => {
                 <MdDownloadForOffline />
               </a>
 
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deletePin(pinId);
-                  navigate("/");
-                }}
-                className="bg-gray-200 text-red-500 w-12 h-12 p-2 rounded-full flex items-center justify-center text-dark text-3xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
-              >
-                <AiTwotoneDelete />
-              </button>
+              {pinDetails?.postedBy?._id === user?._id && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deletePin(pinId);
+                    navigate("/");
+                  }}
+                  className="bg-gray-200 text-red-500 w-12 h-12 p-2 rounded-full flex items-center justify-center text-dark text-3xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
+                >
+                  <AiTwotoneDelete />
+                </button>
+              )}
             </div>
 
             <div className="truncate max-w-md ml-9 underline text-blue-500">
@@ -166,7 +168,7 @@ const PinDetails = ({ user }) => {
           <Link
             to={`/user-profile/${pinDetails?.postedBy?._id}`}
             className="flex flex-wrap gap-2 mt-5 items-center bg-white rounded-lg"
-            style={{ width: '-webkit-fit-content'}}
+            style={{ width: "-webkit-fit-content" }}
           >
             <img
               className="w-9 h-9 rounded-full object-cover"

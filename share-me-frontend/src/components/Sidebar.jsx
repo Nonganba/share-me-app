@@ -36,7 +36,7 @@ const Sidebar = ({ user, closeToggle }) => {
             }
             onClick={handleCloseSidebar}
           >
-            <RiHomeFill />
+            <RiHomeFill className="text-3xl"/>
             Home
           </NavLink>
 
