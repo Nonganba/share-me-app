@@ -74,7 +74,7 @@ module.exports = {
         },
 
         "slide-down": {
-          from: { opacity: 0, transform: "translateY(-15%)" },
+          from: { opacity: 0, transform: "translateY(-5%)" },
           to: { opacity: 1, transform: "none" },
         },
       },

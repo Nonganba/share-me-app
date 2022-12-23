@@ -52,6 +52,8 @@ const PinDetails = ({ user }) => {
 
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
 
+  console.log(alreadySaved);
+
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
       setSavingPost(true);
@@ -71,7 +73,6 @@ const PinDetails = ({ user }) => {
         ])
         .commit()
         .then(() => {
-          window.location.reload();
           setSavingPost(false);
         });
     }
@@ -79,6 +80,7 @@ const PinDetails = ({ user }) => {
 
   const addComment = () => {
     if (comment) {
+      setAddingComment(true);
       client
         .patch(pinId)
         .setIfMissing({ comments: [] })
@@ -103,7 +105,7 @@ const PinDetails = ({ user }) => {
 
   useEffect(() => {
     fetchPinDetails();
-  }, [pinId]);
+  }, [pinId, savingPost]);
 
   if (!pinDetails) return <Spinner message="Loading Pin" />;
 
@@ -165,7 +167,8 @@ const PinDetails = ({ user }) => {
 
           <Link
             to={`/user-profile/${pinDetails?.postedBy?._id}`}
-            className="flex gap-2 mt-5 items-center bg-white rounded-lg"
+            className="flex flex-wrap gap-2 mt-5 items-center bg-white rounded-lg"
+            style={{ width: '-webkit-fit-content'}}
           >
             <img
               className="w-9 h-9 rounded-full object-cover"
@@ -255,10 +258,12 @@ const PinDetails = ({ user }) => {
 
                 <button
                   type="button"
-                  className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold outline-none"
+                  className={`${addingComment ? "bg-gray-900" : "bg-red-500"} ${
+                    comment ? "opacity-100" : "opacity-75"
+                  } text-white rounded-full px-6 py-2 font-semibold outline-none`}
                   onClick={addComment}
                 >
-                  {addingComment ? "Posting comment..." : "Post"}
+                  {addingComment ? "Posting..." : "Post"}
                 </button>
               </div>
             </div>
@@ -275,7 +280,9 @@ const PinDetails = ({ user }) => {
           <MasonryLayout pins={pins} />
         </>
       ) : (
-        <Spinner message="Loading similar Pins..." />
+        <h2 className="text-red-500 font-bold text-2xl text-center mt-20">
+          Oops, No Similar Pins Available !!
+        </h2>
       )}
     </>
   );
