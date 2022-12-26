@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.95b3c663.chunk.css",
+    "main.js": "/static/js/main.77b141b4.chunk.js",
+    "main.js.map": "/static/js/main.77b141b4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bc3c0b57.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bc3c0b57.js.map",
+    "static/js/2.80411fc3.chunk.js": "/static/js/2.80411fc3.chunk.js",
+    "static/js/2.80411fc3.chunk.js.map": "/static/js/2.80411fc3.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.95b3c663.chunk.css.map": "/static/css/main.95b3c663.chunk.css.map",
+    "static/js/2.80411fc3.chunk.js.LICENSE.txt": "/static/js/2.80411fc3.chunk.js.LICENSE.txt",
+    "static/media/art.4f19beca.png": "/static/media/art.4f19beca.png",
+    "static/media/bikes.b26781e4.png": "/static/media/bikes.b26781e4.png",
+    "static/media/cars.4cc70ec9.png": "/static/media/cars.4cc70ec9.png",
+    "static/media/cats.447f8931.png": "/static/media/cats.447f8931.png",
+    "static/media/dogs.5e63ec3d.png": "/static/media/dogs.5e63ec3d.png",
+    "static/media/fitness.d4361143.png": "/static/media/fitness.d4361143.png",
+    "static/media/food.fa56f8af.png": "/static/media/food.fa56f8af.png",
+    "static/media/music.5e8b861b.png": "/static/media/music.5e8b861b.png",
+    "static/media/nature.2777cb0e.png": "/static/media/nature.2777cb0e.png",
+    "static/media/photo.c61c0746.png": "/static/media/photo.c61c0746.png",
+    "static/media/quotes.b52d25d4.png": "/static/media/quotes.b52d25d4.png",
+    "static/media/share.f758eefc.mp4": "/static/media/share.f758eefc.mp4",
+    "static/media/travel.1344d553.png": "/static/media/travel.1344d553.png",
+    "static/media/wallpaper.f787df48.png": "/static/media/wallpaper.f787df48.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bc3c0b57.js",
+    "static/js/2.80411fc3.chunk.js",
+    "static/css/main.95b3c663.chunk.css",
+    "static/js/main.77b141b4.chunk.js"
+  ]
+}
